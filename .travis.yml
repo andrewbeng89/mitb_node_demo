@@ -20,6 +20,7 @@ after_success:
 - git rm -rf .
 - ls
 - git checkout master -- public
+- git pull origin gh-pages
 - git add -A .
 - git config --global user.email "andrew.beng.2010@sis.smu.edu.sg"
 - git config --global user.name "andrewbeng89"
