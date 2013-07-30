@@ -1,0 +1,11 @@
+{"ts":1375151425851,"silentsave":true,"restoring":false,"patch":[[{"diffs":[[1,"<html>\n  <head>\n    <title>My Home Page</title>\n  </head>\n  <body>\n    <h1>Hello, Welcome to My Home Page</h1>\n    <h2>Changed something yet again, and again, changes</h2>\n  </body>\n</html>"]],"start1":0,"start2":0,"length1":0,"length2":189}]],"length":189}
+{"contributors":[],"silentsave":false,"ts":1375151308395,"patch":[[{"diffs":[[0,"<h2>"],[-1,"Changed something yet again, and again, chan"],[1,"This is a test pa"],[0,"ge"],[-1,"s"],[0,"</h2"]],"start1":115,"start2":115,"length1":55,"length2":27}]],"length":161,"saved":false}
+{"ts":1375152069634,"patch":[[{"diffs":[[0,"est page"],[1,". Welcome!"],[0,"</h2>\n  "]],"start1":130,"start2":130,"length1":16,"length2":26}]],"length":171,"saved":false}
+{"ts":1375152325394,"patch":[[{"diffs":[[0," Welcome"],[1," to MITB Cloud"],[0,"!</h2>\n "]],"start1":139,"start2":139,"length1":16,"length2":30}]],"length":185,"saved":false}
+{"ts":1375153052943,"patch":[[{"diffs":[[0,"TB Cloud"],[1," module"],[0,"!</h2>\n "]],"start1":153,"start2":153,"length1":16,"length2":23}]],"length":192,"saved":false}
+{"ts":1375153407110,"patch":[[{"diffs":[[0," module!"],[1,"!"],[0,"</h2>\n  "]],"start1":161,"start2":161,"length1":16,"length2":17}]],"length":193,"saved":false}
+{"contributors":[],"silentsave":false,"ts":1375154163364,"patch":[[{"diffs":[[0,"Page"],[-1,". Welcome to MITB Cloud module!!</h1>\n    <h2>Changed something yet again, and again, changes"],[1,"</h1>\n    <h2>This is a test page. Welcome to MITB Cloud module!"],[0,"</h2"]],"start1":101,"start2":101,"length1":101,"length2":72}]],"length":192,"saved":false}
+{"ts":1375162289051,"patch":[[{"diffs":[[0," module!"],[1,"! Some changes here..."],[0,"</h2>\n  "]],"start1":161,"start2":161,"length1":16,"length2":38}]],"length":214,"saved":false}
+{"ts":1375162615734,"patch":[[{"diffs":[[0,"s here.."],[-1,"."],[0,"</h2>\n  "]],"start1":182,"start2":182,"length1":17,"length2":16}]],"length":213,"saved":false}
+{"ts":1375162847205,"patch":[[{"diffs":[[0," module!"],[-1,"!"],[0," Some ch"]],"start1":161,"start2":161,"length1":17,"length2":16}]],"length":212,"saved":false}
+{"ts":1375163353415,"patch":[[{"diffs":[[0,"loud"],[-1," module"],[0,"! So"]],"start1":157,"start2":157,"length1":15,"length2":8}]],"length":205,"saved":false}

@@ -1,0 +1,30 @@
+language: node_js
+node_js:
+- '0.11'
+- '0.10'
+- '0.8'
+- '0.6'
+branches:
+  only:
+  - master
+before_script:
+- npm install -g mocha
+script:
+- npm -d install
+- npm test
+after_success:
+- git clone https://github.com/andrewbeng89/mitb_node_demo
+- cd mitb_travis-ci
+- git branch -a
+- git checkout gh-pages
+- ls
+- git checkout master -- public
+- git add -A .
+- git config --global user.email "andrew.beng.2010@sis.smu.edu.sg"
+- git config --global user.name "andrewbeng89"
+- git commit -m "drone.io update"
+- git status
+- git push https://$MY_GITHUB_TOKEN@github.com/andrewbeng89/mitb_node_demo.git gh-pages
+env:
+  global:
+    secure: Zne2/PcxxbtCM6QCQehWVGpqcCZDIF1Z6MTRBfaL5OtHTptMEp//jI1v6BdTGSMOK2FkuUMofRjuTtS+6XkVSawi1j+vTpzm6AAPMcd4gT1rhJxWWy7UFuB+kxNE14SC3fOwvZC4i9Mt8nJVDftdHc/3sxryJ6DrMIbQRL3HgDk=
