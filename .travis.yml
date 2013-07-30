@@ -22,7 +22,7 @@ after_success:
 - git add -A .
 - git config --global user.email "andrew.beng.2010@sis.smu.edu.sg"
 - git config --global user.name "andrewbeng89"
-- git commit -m "drone.io update"
+- git commit -m "travis-ci update"
 - git status
 - git push https://$MY_GITHUB_TOKEN@github.com/andrewbeng89/mitb_node_demo.git gh-pages
 env:
