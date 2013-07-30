@@ -16,7 +16,7 @@ after_success:
 - git clone https://github.com/andrewbeng89/mitb_node_demo
 - cd mitb_travis-ci
 - git branch -a
-- git checkout gh-pages
+- git checkout --orphan gh-pages
 - ls
 - git checkout master -- public
 - git add -A .
