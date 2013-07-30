@@ -14,7 +14,7 @@ script:
 - npm test
 after_success:
 - git clone https://github.com/andrewbeng89/mitb_node_demo
-- cd mitb_travis-ci
+- cd mitb_node_demo
 - git branch -a
 - git checkout --orphan gh-pages
 - git rm -rf .
