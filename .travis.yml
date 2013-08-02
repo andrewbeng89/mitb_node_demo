@@ -17,11 +17,10 @@ after_success:
 - cd mitb_node_demo
 - git branch -a
 - git checkout --orphan gh-pages
-- git checkout gh-pages
 - ls
 - git checkout master -- public
 - git pull origin gh-pages
-- git add -A .
+- git add ./public
 - git config --global user.email "andrew.beng.2010@sis.smu.edu.sg"
 - git config --global user.name "andrewbeng89"
 - git commit -a -m "travis-ci update"
