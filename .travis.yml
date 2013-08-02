@@ -17,7 +17,9 @@ after_success:
 - cd mitb_node_demo
 - git branch -a
 - git checkout --orphan gh-pages
-- git rm -rf .
+- mv public ../
+- rm -rf .
+- mv ../public ./
 - ls
 - git checkout master -- public
 - git pull origin gh-pages
