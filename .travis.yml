@@ -16,7 +16,7 @@ after_success:
 - git clone https://github.com/andrewbeng89/mitb_node_demo.git
 - cd mitb_node_demo
 - git branch -a
-- git checkout --orphan gh-pages
+- git checkout gh-pages
 - ls
 - git checkout master -- public
 - git pull origin gh-pages
