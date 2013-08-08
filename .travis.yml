@@ -19,8 +19,10 @@ after_success:
 - git checkout gh-pages
 - ls
 - git checkout master -- public
+- git checkout master -- index.html
 - git pull origin gh-pages
 - git add ./public
+- git add ./index.html
 - git config --global user.email "andrew.beng.2010@sis.smu.edu.sg"
 - git config --global user.name "andrewbeng89"
 - git commit -a -m "travis-ci update"
