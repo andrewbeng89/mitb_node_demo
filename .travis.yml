@@ -30,4 +30,12 @@ after_success:
 - git push https://$MY_GITHUB_TOKEN@github.com/andrewbeng89/mitb_node_demo.git gh-pages
 env:
   global:
-    secure: Zne2/PcxxbtCM6QCQehWVGpqcCZDIF1Z6MTRBfaL5OtHTptMEp//jI1v6BdTGSMOK2FkuUMofRjuTtS+6XkVSawi1j+vTpzm6AAPMcd4gT1rhJxWWy7UFuB+kxNE14SC3fOwvZC4i9Mt8nJVDftdHc/3sxryJ6DrMIbQRL3HgDk=
+  - secure: Zne2/PcxxbtCM6QCQehWVGpqcCZDIF1Z6MTRBfaL5OtHTptMEp//jI1v6BdTGSMOK2FkuUMofRjuTtS+6XkVSawi1j+vTpzm6AAPMcd4gT1rhJxWWy7UFuB+kxNE14SC3fOwvZC4i9Mt8nJVDftdHc/3sxryJ6DrMIbQRL3HgDk=
+  - secure: CcGQNAHjjmCFmIUk7vMhHfayAXWD8cl7UpEGsCwOZlhln7pYJmwWWY/NnTWA4eTq1DVTu/8MIOpSPzzuewe6TJj1ct7WWcTvWIj9O/WrcgN90Dljhcjr2fEEovPLdrchhcgSy4JbS/Ol8tRm47KMgobJEkudHtEkmWBR0IBoTG0=
+deploy:
+  provider: heroku
+  api_key:
+    secure: P9jpi9rk9W+564aOVRTu6z/VoFYBUH06AtqvQcs61JJ7TinDfuSKeWsSoG3TCfSLEEDDJ4ubKuezrXSYnDQ6PmFokRsBLCaoJeGOVhDq/OGSGjSGfwx1OlV//Aug7zEoSzWNh2wj4VFKvC/iPGiFgAG+v7lOvh0JQA4jE3zwGkw=
+  app: mitb-node-demo
+  on:
+    repo: andrewbeng89/mitb_node_demo
