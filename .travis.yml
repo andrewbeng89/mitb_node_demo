@@ -31,7 +31,6 @@ after_success:
 env:
   global:
   - secure: Zne2/PcxxbtCM6QCQehWVGpqcCZDIF1Z6MTRBfaL5OtHTptMEp//jI1v6BdTGSMOK2FkuUMofRjuTtS+6XkVSawi1j+vTpzm6AAPMcd4gT1rhJxWWy7UFuB+kxNE14SC3fOwvZC4i9Mt8nJVDftdHc/3sxryJ6DrMIbQRL3HgDk=
-  - secure: CcGQNAHjjmCFmIUk7vMhHfayAXWD8cl7UpEGsCwOZlhln7pYJmwWWY/NnTWA4eTq1DVTu/8MIOpSPzzuewe6TJj1ct7WWcTvWIj9O/WrcgN90Dljhcjr2fEEovPLdrchhcgSy4JbS/Ol8tRm47KMgobJEkudHtEkmWBR0IBoTG0=
 deploy:
   provider: heroku
   api_key:
