@@ -88,6 +88,28 @@ app.post('/todos', function(req, res) {
     });
 });
     
+
+app.put('/todos/:id', function(req, res) {
+    var todo = req.todo;
+    todo_collection.update(todo, {
+        $set: {
+            completed: (todo.completed === true) ? false : true
+        }
+    }, function (err, doc) {
+        if (!err) {
+            res.json({
+                result: "Updated"
+            });
+        }
+        else {
+            res.json({
+                result: "Failed",
+                error: err
+            });
+        }
+    });
+});
+
 app.delete('/todos/:id', function(req, res) {
     var todo = req.todo;
     todo_collection.findAndRemove(todo, [['id', 1]], function(err, doc) {

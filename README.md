@@ -110,3 +110,6 @@ deploy:
 * updated to include public folder push to gh-pages branch
 * coming soon: challenging tasks
 * Check you the sister tutorial for deploying to Google App Engine [here](https://github.com/andrewbeng89/mitb_gae_demo)
+
+
+## View the demo app on [Heroku](http://mitb-node-demo.herokuapp.com)
