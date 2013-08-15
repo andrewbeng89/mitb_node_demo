@@ -9,10 +9,17 @@ branches:
   - master
 before_script:
 - npm install -g mocha
+- mpm install
+- npm install -g grunt-cli
 script:
 - npm -d install
 - npm test
 after_success:
+- wget https://s3.amazonaws.com/elasticbeanstalk/cli/AWS-ElasticBeanstalk-CLI-2.5.1.zip
+- unzip AWS-ElasticBeanstalk-CLI-2.5.1.zip
+- export PATH=$PATH:$PWD/AWS-ElasticBeanstalk-CLI-2.5.1/eb/linux/python2.7
+- eb init -I $AWS_ACCESS_KEY -S $AWS_ACCESS_SECRET -a mitb-node-demo -e mitb-node-demo –region "ap-southeast-1" -s "64bit Amazon Linux running Node.js"
+- eb start -f
 - git clone https://github.com/andrewbeng89/mitb_node_demo.git
 - cd mitb_node_demo
 - git branch -a
@@ -31,6 +38,8 @@ after_success:
 env:
   global:
   - secure: Zne2/PcxxbtCM6QCQehWVGpqcCZDIF1Z6MTRBfaL5OtHTptMEp//jI1v6BdTGSMOK2FkuUMofRjuTtS+6XkVSawi1j+vTpzm6AAPMcd4gT1rhJxWWy7UFuB+kxNE14SC3fOwvZC4i9Mt8nJVDftdHc/3sxryJ6DrMIbQRL3HgDk=
+  - secure: TXoDGrBizugjfP8pqBoUbsxD9e/T7m8Y+dbDfjl8/1/1qW+yihH1l+uEl9/fSgVrWhx2GUYM4+80zHWlNLDYoKDHVz9H6spFLREb/Rdjzn9/RfR9uCOMnZIeqlgs7uDE0FnP1zxkwV96nqqoAwfbDuAS4f2MEtuXU1qSSDZxLxs=
+  - secure: Z720libU/DM0EZcaBag0HiA8Lo5ZjXWhE1kF99FGOKvkxtzyZ2VbyD4VAzEjcbdfL/CQFp9irTZlE642g1p8psMb7vwQTyWFpOgexmVEstBvxMWjJkN5JRcx7X8qpGValc/LVcAdl6MySSAWqzJWetYCbVvdBVn7eP+l1uFhyGs=
 deploy:
   provider: heroku
   api_key:
