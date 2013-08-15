@@ -15,6 +15,7 @@ script:
 after_success:
 - wget https://s3.amazonaws.com/elasticbeanstalk/cli/AWS-ElasticBeanstalk-CLI-2.5.1.zip
 - unzip AWS-ElasticBeanstalk-CLI-2.5.1.zip
+- export PATH=$PATH:$PWD/AWS-ElasticBeanstalk-CLI-2.5.1/eb/linux/python2.7
 - git clone https://github.com/andrewbeng89/mitb_node_demo.git
 - cd mitb_node_demo
 - git branch -a
