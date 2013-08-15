@@ -5,13 +5,6 @@ todoApp.controller('TodoController', function($scope, $http) {
     $scope.todos = [];
     $scope.loaded = false;
     
-    $http.get('/todos')
-    .success(function(todos) {
-      
-    }).error(function(err) {
-      alert(err);
-    });
-    
     $http.get('/todos').success(function(data, status, headers, config) {
         $scope.loaded = true;
         $scope.todos = data;
@@ -33,6 +26,13 @@ todoApp.controller('TodoController', function($scope, $http) {
 
     $scope.changeCompleted = function(todo) {
         // Update the todo
+        $http.put('/todos/' + todo.id).success(function(data, status, headers, config) {
+            if (data.result === 'success') {
+                console.log('Todo updated! ID: ' + id);
+            } else {
+                console.log('Something went wrong: ' + data.error);
+            }
+        });
         var message = (todo.completed === true) ? 'Task Completed!' : 'Task Uncompleted!';
     };
 
