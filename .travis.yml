@@ -13,9 +13,11 @@ script:
 - npm -d install
 - npm test
 after_success:
-- wget https://s3.amazonaws.com/elasticbeanstalk/cli/AWS-ElasticBeanstalk-CLI-2.5.1.zip
+- wget https://dl.dropboxusercontent.com/u/6484381/AWS-ElasticBeanstalk-CLI-2.5.1.zip
 - unzip AWS-ElasticBeanstalk-CLI-2.5.1.zip
 - export PATH=$PATH:$PWD/AWS-ElasticBeanstalk-CLI-2.5.1/eb/linux/python2.7
+- echo "No"|eb init -S $AWS_ACCESS_SECRET -I $AWS_ACCESS_KEY -a mitb-node-demo -e mitb-node-demo --region "ap-southeast-1" -s "64bit Amazon Linux running Node.js"
+- echo "y"|eb update
 - git clone https://github.com/andrewbeng89/mitb_node_demo.git
 - cd mitb_node_demo
 - git branch -a
