@@ -16,7 +16,8 @@ after_success:
 - wget https://dl.dropboxusercontent.com/u/6484381/AWS-ElasticBeanstalk-CLI-2.5.1.zip
 - unzip AWS-ElasticBeanstalk-CLI-2.5.1.zip
 - export PATH=$PATH:$PWD/AWS-ElasticBeanstalk-CLI-2.5.1/eb/linux/python2.7
-- echo "No"|eb init -S $AWS_ACCESS_SECRET -I $AWS_ACCESS_KEY -a mitb-node-demo -e mitb-node-demo --region "ap-southeast-1" -s "64bit Amazon Linux running Node.js"
+- echo "No"|eb init -S $AWS_ACCESS_SECRET -I $AWS_ACCESS_KEY -a mitb-node-demo -e
+  mitb-node-demo --region "ap-southeast-1" -s "64bit Amazon Linux running Node.js"
 - eb push
 - git clone https://github.com/andrewbeng89/mitb_node_demo.git
 - cd mitb_node_demo
@@ -45,3 +46,5 @@ deploy:
   app: mitb-node-demo
   on:
     repo: andrewbeng89/mitb_node_demo
+dd:
+  secure: PsuVfoD4vGSG3qM6vZjeRRgTKbLO/RFpH3JlnQZRoSrEIr24q3RYF52Y8MSrSUmsp3bISex16LoBFT9r5YBaj47dSc/WFyLb5Cf9+6NDmB97f1UIpmMmAOrtbzThT2yUiDTQ7D7yeG4LZFV6LjKHVX2Z2v3ql2NHG9J9TtkoWHQ=
