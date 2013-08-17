@@ -1,4 +1,3 @@
-MONGO
 /**
  * Module dependencies.
  * Test Commit again
