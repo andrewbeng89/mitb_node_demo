@@ -1,4 +1,4 @@
-
+MONGO
 /**
  * Module dependencies.
  * Test Commit again
@@ -10,7 +10,7 @@ var express = require('express')
   , http = require('http')
   , path = require('path')
   , MongoClient = require('mongodb').MongoClient
-  , connection_string = 'mongodb://mitb_user:mitb1234@ds039088.mongolab.com:39088/mitb_todos';
+  , connection_string = 'mongodb://mitb_user:' + process.env.MONGO_PASSWORD + '@ds039088.mongolab.com:39088/mitb_todos';
 
 var app = express();
 
