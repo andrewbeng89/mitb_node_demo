@@ -9,7 +9,8 @@ var express = require('express')
   , http = require('http')
   , path = require('path')
   , MongoClient = require('mongodb').MongoClient
-  , connection_string = 'mongodb://mitb_user:' + process.env.MONGO_PASSWORD + '@ds039088.mongolab.com:39088/mitb_todos';
+  , MONGO_PASSWORD = process.env.MONGO_PASSWORD || require('./credentials').MONGO_PASSWORD
+  , connection_string = 'mongodb://mitb_user:' + MONGO_PASSWORD + '@ds039088.mongolab.com:39088/mitb_todos';
 
 var app = express();
 
