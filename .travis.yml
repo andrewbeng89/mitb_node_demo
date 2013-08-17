@@ -1,4 +1,4 @@
-language: node_js
+travislanguage: node_js
 node_js:
 - '0.11'
 - '0.10'
@@ -39,6 +39,7 @@ env:
   - secure: Zne2/PcxxbtCM6QCQehWVGpqcCZDIF1Z6MTRBfaL5OtHTptMEp//jI1v6BdTGSMOK2FkuUMofRjuTtS+6XkVSawi1j+vTpzm6AAPMcd4gT1rhJxWWy7UFuB+kxNE14SC3fOwvZC4i9Mt8nJVDftdHc/3sxryJ6DrMIbQRL3HgDk=
   - secure: TXoDGrBizugjfP8pqBoUbsxD9e/T7m8Y+dbDfjl8/1/1qW+yihH1l+uEl9/fSgVrWhx2GUYM4+80zHWlNLDYoKDHVz9H6spFLREb/Rdjzn9/RfR9uCOMnZIeqlgs7uDE0FnP1zxkwV96nqqoAwfbDuAS4f2MEtuXU1qSSDZxLxs=
   - secure: Z720libU/DM0EZcaBag0HiA8Lo5ZjXWhE1kF99FGOKvkxtzyZ2VbyD4VAzEjcbdfL/CQFp9irTZlE642g1p8psMb7vwQTyWFpOgexmVEstBvxMWjJkN5JRcx7X8qpGValc/LVcAdl6MySSAWqzJWetYCbVvdBVn7eP+l1uFhyGs=
+  - secure: SRPOoZ8/YCjD7hRUe9gGvIXzaN/YDH8V6tqQD7h1EXFdGbau83GLoYeyB2/errM7JLJxjbs8rMn3VLNYk/8ER8M63MeHNS/Tq/NG9fzJzzoUJIN/gk6SN/RgTvGg+KOLY39ndO6NTcUVeCYq1rUAlM0ptbmBULLH2TVviWnM3dI=
 deploy:
   provider: heroku
   api_key:
@@ -46,5 +47,3 @@ deploy:
   app: mitb-node-demo
   on:
     repo: andrewbeng89/mitb_node_demo
-dd:
-  secure: PsuVfoD4vGSG3qM6vZjeRRgTKbLO/RFpH3JlnQZRoSrEIr24q3RYF52Y8MSrSUmsp3bISex16LoBFT9r5YBaj47dSc/WFyLb5Cf9+6NDmB97f1UIpmMmAOrtbzThT2yUiDTQ7D7yeG4LZFV6LjKHVX2Z2v3ql2NHG9J9TtkoWHQ=
