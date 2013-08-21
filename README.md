@@ -5,7 +5,7 @@ This tutorial will cover the steps for using a virtual maching (VM) on [koding.c
 
 Once you have signed up and received an invitation for Koding.com, you will have access to a persional Koding VM. Open the terminal shell of your VM which will look like this:
 
-![koding terminal](/images/koding_vm.png)
+![koding terminal](https://github.com/andrewbeng89/mitb_gae_demo/raw/master//images/koding_vm.png)
 
 
 ## Install Travis Ruby Gem
