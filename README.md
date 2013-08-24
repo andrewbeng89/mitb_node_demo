@@ -3,6 +3,8 @@
 
 This tutorial will cover the steps for using a virtual maching (VM) on [koding.com](https://koding.com) to code node.js web apps and use Travis-CI as a test and deploy tool to push updates to Heroku. This tutorial will also allow you to push 'static' files (e.g. HTML, JavaScripts etc.) to the GitHub pages brance of your repository.
 
+The second part of this tutorial will cover automated 
+
 Once you have signed up and received an invitation for Koding.com, you will have access to a persional Koding VM. Open the terminal shell of your VM which will look like this:
 
 ![koding terminal](https://github.com/andrewbeng89/mitb_gae_demo/raw/master//images/koding_vm.png)
@@ -16,7 +18,9 @@ The Travi-CI gem will be used to encrypt a OAuth2 token that will be used to pus
 2. Enter your Koding password when prompted
 
 
-## Configuring Git and GitHub
+## Part 1: Travis, Github and Heroku
+
+### Configuring Git and GitHub
 
 Generate a new ssh key pair on the VM to use to sync with GitHub and Travis-CI.
 
@@ -36,7 +40,7 @@ Generate a new ssh key pair on the VM to use to sync with GitHub and Travis-CI.
 </pre> 
 
 
-## Clone and Configure Demo App
+### Clone and Configure Demo App
 
 1. Clone this repository `git clone https://github.com/andrewbeng89/mitb_node_demo.git -b master`
 2. `cd mitb_node_demo`
@@ -46,7 +50,7 @@ Generate a new ssh key pair on the VM to use to sync with GitHub and Travis-CI.
 6. Add the remote to the newly create GitHub repository `git remote add origin git@github.com:<your_username>/<your_new_repo>.git`
 
 
-## Running the application on Koding.com
+### Running the application on Koding.com
 
 You can use Koding.com as a testing environment for development.
 
@@ -54,7 +58,7 @@ You can use Koding.com as a testing environment for development.
 2. Open your application from "vm-0.<your_koding_username>.kd.io:3000"
 
 
-## Install and user the Heroku Toolbelt
+### Install and user the Heroku Toolbelt
 
 After signing up for [Heroku](https://heroku.com), install the [Heroku Toolbelt](https://toolbelt.heroku.com/) on your Koding VM
 
@@ -76,7 +80,7 @@ deploy:
 </pre> 
 
 
-## Add GitHub Personal API Access Token
+### Add GitHub Personal API Access Token
 
 1. Create a new Personal API Access Token [here](https://github.com/settings/applications)
 2. Copy the token to clipboar and encrypt it with travis
@@ -84,7 +88,7 @@ deploy:
 4. Edit this line of the .travis.yml file: `- git push https://$MY_GITHUB_TOKEN@github.com/<your_username>/<your_repo>.git gh-pages`
 
 
-## Initilialise GH-Pages Branch 
+### Initilialise GH-Pages Branch 
 
 1. From the terminal, cd out of the application repository: `cd ..`
 2. Clone the github repository into a new gh-pages folder: `git clone git@github.com:<your_username>/<your_repo>.git gh-pages`
@@ -97,7 +101,7 @@ deploy:
 9. Push: `git push origin gh-pages`
 
 
-## Setup and Build with Travis-CI
+### Setup and Build with Travis-CI
 
 1. Register for [Travis-CI](https://travis-ci.org) using your GitHub account
 2. From your Travis-CI [profile](https://travis-ci.org/profile) page, enable the newly created GitHub repository
@@ -111,5 +115,53 @@ deploy:
 * coming soon: challenging tasks
 * Check you the sister tutorial for deploying to Google App Engine [here](https://github.com/andrewbeng89/mitb_gae_demo)
 
+
+## Part 2: AWS Elastic Beanstalk and Elastic Load Balancing
+
+Sign up for [Amazon Web Services (AWS)](https://aws.amazon.com). The following steps will walk through using services from AWS. Elastic Beanstalk (EB) provides a platform which developers can deploy a wide variety of web applications to Amazon Machine Instances (AMIs) remotely via web or command line interfaces. Elastic Load Balancer (ELB) is used to configure automated resource scaling on AWS, e.g. scaling an EB instance by launching more AMIs when a certian performance threshold has exceeded.
+
+### Security Credentials
+
+1. Create an Access Key with a corresponding ID and Secret [here](https://portal.aws.amazon.com/gp/aws/securityCredentials)
+2. From the [EC2 console](https://console.aws.amazon.com/ec2/v2/home?region=ap-southeast-1), create a new Key Pair
+
+
+### Using the Elastic Beanstalk Command Line Interface Tools
+
+1. Sign up for Elastic Beanstalk
+2. From the VM terminal, navigate to "home": `cd ~$`
+3. Download the modified version of the EB CLI Tools from the VM terminal: `wget https://dl.dropboxusercontent.com/u/6484381/AWS-ElasticBeanstalk-CLI-2.5.1.zip`
+4. Unzip: `unzip wget AWS-ElasticBeanstalk-CLI-2.5.1.zip`
+5. Export the PATH for the EB tools: `export PATH=$PATH:$PWD/AWS-ElasticBeanstalk-CLI-2.5.1/eb/linux/python2.7`
+6. Navigate to application folder: `cd mitb_node_demo`
+7. Initialise a new EB application: `eb init`
+8. When prompted, enter your AWS Access Key ID and Secret respectively5
+9. Select option 5 for "service regions" (Asia Pacific (Singapore))
+10. Enter an application name: `<yourname>-node-demo`
+11. Use this application name for environment name as well
+12. Select option 6 for "solution stack" (64bit Amazon Linux running Node.js)
+13. Enter `No` when prompted to create a RDS instance
+14. Start the environment: `eb start`
+15. Push the application from the repository: `eb push`
+16. View the application at the URL returned in the terminal
+
+
+### Automate EB updates with Travis
+
+These lines in the .travis.yml file automates the updates to EB. The AWS Access Key ID and Secrets will be encrypted by travis and used upon a successful build.
+
+<pre>
+  <code>
+- wget https://dl.dropboxusercontent.com/u/6484381/AWS-ElasticBeanstalk-CLI-2.5.1.zip
+- unzip AWS-ElasticBeanstalk-CLI-2.5.1.zip
+- export PATH=$PATH:$PWD/AWS-ElasticBeanstalk-CLI-2.5.1/eb/linux/python2.7
+- echo "No"|eb init -S $AWS_ACCESS_SECRET -I $AWS_ACCESS_KEY -a mitb-node-demo -e mitb-node-demo --region "ap-southeast-1" -s "64bit Amazon Linux running Node.js"
+- eb push
+  </code>
+</pre>
+
+1. Encrypt you AWS Access Key ID with the travis gem: `travis encrypt AWS_ACCESS_KEY="<paste_key_id_from_clipboard>" --add`
+2. Encrypt you AWS Access Key Secret with the travis gem: `travis encrypt AWS_ACCESS_SECRET="<paste_key_secret_from_clipboard>" --add`
+3. Edit this line of the .travis.yml file: `-a <name-of-your-app> -e <name-of-your-app>`
 
 ## View the demo app on [Heroku](http://mitb-node-demo.herokuapp.com)
