@@ -164,4 +164,27 @@ These lines in the .travis.yml file automates the updates to EB. The AWS Access 
 2. Encrypt you AWS Access Key Secret with the travis gem: `travis encrypt AWS_ACCESS_SECRET="<paste_key_secret_from_clipboard>" --add`
 3. Edit this line of the .travis.yml file: `-a <name-of-your-app> -e <name-of-your-app>`
 
+
+### Auto Scaling with Elastic Beanstalk
+
+The following configuration will automatically scale the Elastic Beanstalk application to a maximum of 4 instances depending on a threshold number of requests made to the application.
+
+1. Navigate to your application environment from the [Elastic Beanstalk console](https://console.aws.amazon.com/elasticbeanstalk/home?region=ap-southeast-1#/applications)
+2. Navigate to the "Configuations" settings for your application
+3. Select "Scaling" configuration
+4. Change the "Environment type" from "Single instance" to "Load balancing, autoscaling"
+5. Use the default values for "Auto Scaling"
+6. Use the following values for "Scaling Trigger"
+7. Trigger measurement: "RequestCount" (counts the number of requests made to the application)
+8. Trigger statistic: "Sum" (sum the request count)
+9. Unit of measurement: "Count"
+10. Measurement period (minutes): 1
+11. Breach duration (minutes): 1
+12. Upper treshold: 60 (trigger scaling up when there are more than 60 requests made in a minute)
+13. Upper breach scale increment: 1 (scale up by one instance)
+14. Lower threshold: 30 (trigger scaling down whent there are less than 30 requests made in a minute)
+15. Lower breach scale increment: -1 (scale down by one instance)
+16. Save the auto scaling configuration
+
+
 ## View the demo app on [Heroku](http://mitb-node-demo.herokuapp.com)
