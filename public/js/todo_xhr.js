@@ -27,7 +27,7 @@ todoApp.controller('TodoController', function($scope, $http) {
     $scope.changeCompleted = function(todo) {
         // Update the todo
         $http.put('/todos/' + todo.id).success(function(data, status, headers, config) {
-            if (data.result === 'success') {
+            if (data.result === 'Updated') {
                 console.log('Todo updated! ID: ' + id);
             } else {
                 console.log('Something went wrong: ' + data.error);

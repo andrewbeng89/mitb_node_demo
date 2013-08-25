@@ -187,4 +187,34 @@ The following configuration will automatically scale the Elastic Beanstalk appli
 16. Save the auto scaling configuration
 
 
+### Track Elastic Beanstalk Activity and Scaling Events
+
+1. Using the EB Console, select your application to open up the EB dashboard for the app to track recent environment updates
+2. Select "Montitoring" to view performance details of the appliation, e.g. latency, requests, CPU utilization etc.
+3. Use the EC2 console to view the number of actual instances of the application
+4. To simulate exceeding the request threshold configured above, allow other people to use application simultaneously for five minutes, by continuously creating, checking and deleting todo items
+5. This should cause the request per minute to exceed the threshold of 60 (observe under EB monitoring)
+6. The auto scaling should be triggered (observe under EB dashnoard)
+7. Note the number of EC2 instances for the app after auto scale events (observe under EC2 console)
+
+
+## Part 3: Application Development in the Cloud
+
+This section will cover simple front and back end techniques to get you up to speed with application development in the Cloud
+
+### AngularJS
+
+[AngularJS](http://angularjs.org) provides a modularized approach to bind data structures, e.g. Arrays, Objects and other variables, to HTML views. This repository provides the code for a simple "todo list" application created in AngularJS.
+
+There are two versions of this "todo" application:
+1. A purely front-end AngularJS app that does not communicate with any back-end database that will be pushed to GitHub Pages (index.html located [here](https://github.com/andrewbeng89/mitb_node_demo/blob/master/index.html))
+2. Integrated AngularJS app that communites with a Node.js backe-end hosted on Heroku and Elastic Beanstalk (index.html located [here](https://github.com/andrewbeng89/mitb_node_demo/blob/master/public/index.html))
+
+### Node.js with MongoDB (Mongolab Database-as-a-Service)
+
+
+### Application Tracking with Google Analytics
+
+
 ## View the demo app on [Heroku](http://mitb-node-demo.herokuapp.com)
+## View the demo app on [Elastic Beanstalk](http://mitb-node-demo-8tqj3ypyra.elasticbeanstalk.com)
