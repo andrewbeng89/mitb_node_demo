@@ -1,9 +1,14 @@
 [![Build Status](https://travis-ci.org/andrewbeng89/mitb_node_demo.png?branch=master)](https://travis-ci.org/andrewbeng89/mitb_node_demo)
 # MITB Cloud Computing Lab for Node.js Development and CI with Koding and Travis-CI
 
-This tutorial will cover the steps for using a virtual maching (VM) on [koding.com](https://koding.com) to code node.js web apps and use Travis-CI as a test and deploy tool to push updates to Heroku. This tutorial will also allow you to push 'static' files (e.g. HTML, JavaScripts etc.) to the GitHub pages brance of your repository.
+This tutorial will cover the steps for using a virtual maching (VM) on [koding.com](https://koding.com) to develop and deploy node.js web apps.
 
-The second part of this tutorial will cover automated 
+The tutorial is divided into the following 3 sections: 
+
+1. Part 1 walks through the steps to use Git and Travis-CI as a test and deploy tool to push updates to Heroku (PaaS). This section will also allow you to push 'static' files (e.g. HTML, JavaScripts etc.) to the GitHub pages brance of your repository.
+2. Part 2 demonstrates automated deployment of the same application to AWS Elastic Beanstalk and Auto Scaling based on performance thrsholds.
+3. Part 3 covers application development approaches in the Cloud
+
 
 Once you have signed up and received an invitation for Koding.com, you will have access to a persional Koding VM. Open the terminal shell of your VM which will look like this:
 
@@ -211,10 +216,13 @@ There are two versions of this "todo" application:
 1. A purely front-end AngularJS app that does not communicate with any back-end database that will be pushed to GitHub Pages (index.html located [here](https://github.com/andrewbeng89/mitb_node_demo/blob/master/index.html))
 2. Integrated AngularJS app that communites with a Node.js backe-end hosted on Heroku and Elastic Beanstalk (index.html located [here](https://github.com/andrewbeng89/mitb_node_demo/blob/master/public/index.html))
 
+
 ### Node.js with MongoDB (Mongolab Database-as-a-Service)
+* Work in progress
 
 
 ### Application Tracking with Google Analytics
+* Work in progress
 
 
 ## View the demo app on [Heroku](http://mitb-node-demo.herokuapp.com)
