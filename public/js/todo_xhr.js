@@ -20,6 +20,7 @@ todoApp.controller('TodoController', function($scope, $http) {
             $http.post('/todos', new_todo).success(function(data, status, headers, config) {
                 $scope.newTodoTitle = '';
                 $scope.todos.push(new_todo);
+                _gaq.push(['_trackEvent', 'create', 'click', 'todo']);
             });
         }
     };
@@ -29,6 +30,7 @@ todoApp.controller('TodoController', function($scope, $http) {
         $http.put('/todos/' + todo.id).success(function(data, status, headers, config) {
             if (data.result === 'Updated') {
                 console.log('Todo updated! ID: ' + id);
+                _gaq.push(['_trackEvent', 'update', 'ckeck', 'todo']);
             } else {
                 console.log('Something went wrong: ' + data.error);
             }
@@ -48,6 +50,7 @@ todoApp.controller('TodoController', function($scope, $http) {
             }
         });
         $scope.todos = uncompleted_todos;
+        _gaq.push(['_trackEvent', 'remove', 'click', 'todo']);
     };
 
     function deleteTodo(id) {
