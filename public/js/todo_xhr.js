@@ -29,7 +29,7 @@ todoApp.controller('TodoController', function($scope, $http) {
         // Update the todo
         $http.put('/todos/' + todo.id).success(function(data, status, headers, config) {
             if (data.result === 'Updated') {
-                console.log('Todo updated! ID: ' + id);
+                console.log('Todo updated! ID: ' + todo.id);
                 _gaq.push(['_trackEvent', 'update', 'ckeck', 'todo']);
             } else {
                 console.log('Something went wrong: ' + data.error);
