@@ -31,11 +31,17 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
+// MongoDB Connection and Collections
 var todo_collection;
 MongoClient.connect(connection_string, function(err, db) {
     todo_collection = db.collection('todos');
 });
 
+/*
+* Parameter handling
+* Used when configuring requests with the "/:id" suffix
+* Identifies and retrieves the desired todo object from the Database
+*/
 app.param('id', function(req, res, next, id){
     todo_collection.findOne({
         id: parseFloat(id)
@@ -51,22 +57,29 @@ app.param('id', function(req, res, next, id){
     });
 });
     
+// Root level routing to index.html        
 app.get('/', function (req, res) {
   res.redirect('/index.html');
 });
 app.get('/users', user.list);
-    
+
+// Retieve all the todos from the todo collection
 app.get('/todos', function(req, res) {
+    // Todos returned as an array of todo objects
     todo_collection.find().toArray(function(err, todos) {
         if (!err) {
             res.json(todos);
         } else {
+            // If there's an error, return an empty array
             res.json([]);
         }
     });
 });
 
+// Create a new todo object and store it in the database
 app.post('/todos', function(req, res) {
+    // form data is contained in the request body, i.e. req.body
+    // Collection.insert used to insert new data into the collection
     todo_collection.insert({
         title: req.body.title,
         completed: req.body.completed,
@@ -87,9 +100,11 @@ app.post('/todos', function(req, res) {
     });
 });
     
-
+// Updatae the "completed" property of the todo
 app.put('/todos/:id', function(req, res) {
+    // Todo determined by the parameter is set in the request object, i.e. req.todo
     var todo = req.todo;
+    // Collection.update to update object properties. The $set element in the update query checks the todo's current state and changes it accordingly
     todo_collection.update(todo, {
         $set: {
             completed: (todo.completed === true) ? false : true
@@ -111,6 +126,7 @@ app.put('/todos/:id', function(req, res) {
 
 app.delete('/todos/:id', function(req, res) {
     var todo = req.todo;
+    // Find and remove the desired todo
     todo_collection.findAndRemove(todo, [['id', 1]], function(err, doc) {
         if (!err) {
             res.json({
