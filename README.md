@@ -6,7 +6,7 @@ This tutorial will cover the steps for using a virtual maching (VM) on [koding.c
 The tutorial is divided into the following 3 sections: 
 
 1. Part 1 walks through the steps to use Git and Travis-CI as a test and deploy tool to push updates to Heroku (PaaS). This section will also allow you to push 'static' files (e.g. HTML, JavaScripts etc.) to the GitHub pages brance of your repository.
-2. Part 2 demonstrates automated deployment of the same application to AWS Elastic Beanstalk and Auto Scaling based on performance thrsholds.
+2. Part 2 demonstrates automated deployment of the same application to AWS Elastic Beanstalk and Auto Scaling based on performance thresholds.
 3. Part 3 covers application development approaches in the Cloud
 
 
@@ -123,7 +123,7 @@ deploy:
 
 ## Part 2: AWS Elastic Beanstalk and Elastic Load Balancing
 
-Sign up for [Amazon Web Services (AWS)](https://aws.amazon.com). The following steps will walk through using services from AWS. Elastic Beanstalk (EB) provides a platform which developers can deploy a wide variety of web applications to Amazon Machine Instances (AMIs) remotely via web or command line interfaces. Elastic Load Balancer (ELB) is used to configure automated resource scaling on AWS, e.g. scaling an EB instance by launching more AMIs when a certian performance threshold has exceeded.
+Sign up for [Amazon Web Services (AWS)](https://aws.amazon.com). The following steps will walk through using services from AWS. Elastic Beanstalk (EB) provides a platform which developers can deploy a wide variety of web applications to Amazon Machine Instances (AMIs) remotely via web or command line interfaces. Elastic Load Balancer (ELB) is used to configure automated resource scaling on AWS, e.g. scaling an EB instance by launching more AMIs when a certain performance threshold has exceeded.
 
 ### Security Credentials
 
@@ -216,13 +216,75 @@ There are two versions of this "todo" application:
 1. A purely front-end AngularJS app that does not communicate with any back-end database that will be pushed to GitHub Pages (index.html located [here](https://github.com/andrewbeng89/mitb_node_demo/blob/master/index.html))
 2. Integrated AngularJS app that communites with a Node.js backe-end hosted on Heroku and Elastic Beanstalk (index.html located [here](https://github.com/andrewbeng89/mitb_node_demo/blob/master/public/index.html))
 
+The "todo.js" script, together with the "index.html" file located at the root of this repository is all that is required to get an AngularJS "todo list" application up and running. This purely front-end application is pushed to and viewable on GH-Pages branch of this repository. The list of "todos" is reinitialized to an empty list after the page has been refreshed. In order to create an application that will persist the list "todos", please refer to the steps below.
+
 
 ### Node.js with MongoDB (Mongolab Database-as-a-Service)
-* Work in progress
+
+[Node.js](http://nodejs.org) is a JavaScript platform built on [Google's V8 engine](https://code.google.com/p/v8/), and is used to develop a wide variety of network applications, including web applications.
+
+This demo application uses the [Express web app framework](http://expressjs.com/) as its backbone, with a "public" folder containing all of the front-end code (AngularJS-based application). The AngularJS code for this integrated version of the app exists in "todo_xhr.js". Unlike "todo.js", the method calls will interact with the Expressjs application via HTTP requests. The application back-end code ("app.js") will handle these request to either create, retrieve, update or delete (CRUD) "todo" items in the application's database.
+
+The application database used here is [MongoDB](http://www.mongodb.org/), a document/object based database system. Unlike a traditional relational databse system (e.g. MySQL, Oracle DB), MongoDB is an example of a non-relational [NoSQL](http://en.wikipedia.org/wiki/NoSQL) database. Other examples of NoSQL database systems include CouchDB and Google's App Engine Datastore (NDB is covered in the [sister GAE tutorial](https://github.com/andrewbeng89/mitb_gae_demo)).
+
+To uses MongoDB-as-a-Service hosted on [Mongolab](https://mongolab.com) with the "todo list" application, follow these steps:
+
+1. Sign up for Mongolab [here](https://mongolab.com/signup/)
+2. Once logged in, proceed to create a new mondolab development environment [here](https://mongolab.com/create). Remember to select "Development (single-node)" under "plans"
+3. Choose a name for the database, e.g. "<your name>-todos-db"
+4. When prompted, create the credentials for a new database user (username and password)
+5. Make a note of the database name and the username and password of the new user you have just created 
+
+To make use of the MongoDB database you have just created in the Node.js web application these credentials have to be used in a secure manner:
+
+1. For developemnt on Koding.com, a new file at the root level of this repository called credentials.js will be used
+2. Using the Heroku toolbelt, the MongoDB password will be set as Heroku environment variable
+3. Using the Elastic Beanstalk console, the MongoDB password will be set as Heroku environment variable
+4. Using the travis gem CLI, the MongoDB password will be encrypted and used during the build process
+
+To use the password in the development environment, create a new file called "credentials.js" in the root directory of application repository. Edit the contents of "credentials.js" accordingly:
+
+<pre>
+  <code>
+module.exports = {
+    MONGO_PASSWORD: '<MongoDB Password from Mongolab here>'
+};
+  </code>
+</pre>
+
+Using Heroku toolbelt from the VM terminal:
+
+1. `heroku config:set MONGO_PASSWORD=<MongoDB Password from Mongolab here>`
+2. Verify that the MONGO_PASSWORD variable has been set: `heroku config`
+
+Using the Elastic Beanstalk Console:
+
+1. From the [console](https://console.aws.amazon.com/elasticbeanstalk/home), navigate to the application's "Configuration" page
+2. Scroll down to "Environment Properties"
+3. At the last table row, Enter "MONGO_PASSWORD" into the "Property Name" column and your password into the "Property Value" column
+4. Save the configuration
+
+Using travis to encrypt:
+
+1. From the VM terminal at the repository's root level: `travis encrypt MONGO_PASSWORD="<MongoDB Password from Mongolab here>" --add`
+2. Check the .travis.yml file to verify that a new secure variable has been added
 
 
 ### Application Tracking with Google Analytics
-* Work in progress
+
+Google Analytics can be used as a tool to track your application's users' behaviour. These include page views, application events, content flow and user locations, just to name a few.
+
+The following steps will demonstrate configuring Google Analytics to track the number of page views and the number of CRUD events triggered by users:
+
+1. Create a Google Analytics account [here](http://www.google.com/analytics/)
+2. From the main home console, navigate to the "Admin" page
+3. Create a new "Property"
+4. Enter the details of this application (the URL can either be the Heroku or Elastic Beanstalk URL)
+5. Once created, note the "Tracking ID" for this application
+6. Open the "/public/js/gooogle-analytics.js" file
+7. Edit this line: `_gaq.push(['_setAccount', '<Tracking ID here>']);`
+8. Open the "/public/js/todo_xhr.js" file
+9. The lines with code similar to ` _gaq.push(['_trackEvent', 'create', 'click', 'todo']);` indicate event tracking with Google Analytics
 
 
 ## View the demo app on [Heroku](http://mitb-node-demo.herokuapp.com)
